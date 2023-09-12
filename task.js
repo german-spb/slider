@@ -10,7 +10,7 @@ let sliderShow = (index) => {
     sliders[index].classList.add('slider__item_active');
 }
 
-let prevSlide = () => {
+let prevSlider = () => {
     activIndex++;
     if (activIndex >= sliders.length) {
         activIndex = 0;
@@ -18,7 +18,7 @@ let prevSlide = () => {
     sliderShow(activIndex);
 }
 
-let nextSlide = () => {
+let nextSlider = () => {
     activIndex--;
     if (activIndex < 0) {
         activIndex = sliders.length - 1;
@@ -26,5 +26,5 @@ let nextSlide = () => {
     sliderShow(activIndex);
 }
 
-arrowNext.addEventListener('click', nextSlide);
-arrowPrev.addEventListener('click', prevSlide);
+arrowNext.addEventListener('click', nextSlider);
+arrowPrev.addEventListener('click', prevSlider);
