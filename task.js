@@ -1,39 +1,30 @@
-const prev = document.querySelector('.slider__arrow_prev')
-const next = document.querySelector('.slider__arrow_next')
+let sliders = document.querySelectorAll('.slider__item');
+let arrowPrev = document.querySelector('.slider__arrow_prev');
+let arrowNext = document.querySelector('.slider__arrow_next');
+let activIndex = [...sliders].findIndex(obj => obj.classList.contains('slider__item_active'))
 
-const array = document.querySelectorAll('.slider__item')
-console.log(prev)
-console.log(next)
-console.log(array)
-let i = 1
-
-prev.onclick = () => {
-    console.log(i)
-    if (i == array.length){i = array.length-1}
-    if (i === 0){
-        array[0].classList.remove('slider__item_active')
-        array[array.length-1].classList.add('slider__item_active')
-        i = array.length-1
+let sliderShow = (index) => {
+    for (let i = 0; i < sliders.length; i++) {
+        sliders[i].classList.remove('slider__item_active');
     }
-    else{
-        console.log(i)
-        array[i].classList.remove('slider__item_active')
-        array[i-1].classList.add('slider__item_active')
-        i = i-1
-      }
+    sliders[index].classList.add('slider__item_active');
 }
 
-next.onclick = () => {
-    if (i===0){i = 1}
-    if (i <= array.length-1){
-    array[i].classList.add('slider__item_active')
-    array[i-1].classList.remove('slider__item_active')
-    i = i+1
+let prevSlide = () => {
+    activIndex++;
+    if (activIndex >= sliders.length) {
+        activIndex = 0;
     }
-    else { 
-        i = 0
-        array[array.length-1].classList.remove('slider__item_active')
-        array[0].classList.add('slider__item_active')
-    }
-    
+    sliderShow(activIndex);
 }
+
+let nextSlide = () => {
+    activIndex--;
+    if (activIndex < 0) {
+        activIndex = sliders.length - 1;
+    }
+    sliderShow(activIndex);
+}
+
+arrowNext.addEventListener('click', nextSlide);
+arrowPrev.addEventListener('click', prevSlide);
